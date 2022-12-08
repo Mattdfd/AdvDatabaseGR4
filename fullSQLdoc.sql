@@ -110,20 +110,27 @@ insert into Insurances(insid, patientid, name)
 insert into Insurances(insid, patientid, name)
   values(rxid_seq.nextval, 3 ,'Green Shield');
  
-Create Table Medications(
-    DIN int primary key,
+Create Table Medication(
+    DIN int,
     Name varchar(255),
     Strength varchar(255),
-    Quantity int);
+    Quantity int,    
+    PatientId int,
+    PHID int,
+   CONSTRAINT DIN_PK Primary Key (DIN),
+   CONSTRAINT med_patientid_fk FOREIGN KEY (PatientID) References Patient(PatientID),
+    CONSTRAINT med_pharmid_fk FOREIGN KEY (PHID) References Pharmacist(PHID)
+);
+
+ 
+insert into medications( DIN, name, strength, quantity,PatientID,PHID )
+  values(301171598, 'Pantoprazole' , 40 , 1000,1,1);
  
 insert into medications( DIN, name, strength, quantity )
-  values(301171598, 'Pantoprazole' , 40 , 1000);
+  values(30121688, 'Metformin' , 500 , 9530,1,1);
  
 insert into medications( DIN, name, strength, quantity )
-  values(30121688, 'Metformin' , 500 , 9530);
- 
-insert into medications( DIN, name, strength, quantity )
-  values(359985423, 'Sertraline' , 20 , 320);
+  values(359985423, 'Sertraline' , 20 , 320,2,1);
  
 CREATE SEQUENCE  ID_seq  
     MINVALUE 1
