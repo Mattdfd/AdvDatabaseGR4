@@ -1,12 +1,15 @@
-CREATE TABLE Patients(
-    PatientId int,
-    LastName varchar(255) NOT NULL,
-    FirstName varchar(255),
-    Age int,
-    HealthCardNum int unique,
-    PAddress varchar(255),
-    PhoneNumber varchar(255),
-    CONSTRAINT Patientid_pk PRIMARY KEY(patientid));
+CREATE TABLE patients(
+patientid int Not null Unique,
+DrID int,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+HealthCardNum int,
+PAddress varchar(255),
+PhoneNumber varchar(255),
+CONSTRAINT Patientid_pk PRIMARY KEY(patientid)
+Constraint DRID_FK FOREIGN Key(DrID) References doctors(DrID)
+);
  
 insert into patients(patientid, lastname, firstname, age,healthcardnum, paddress,phonenumber)
   values(id_seq.nextval ,'Eltoukhy', 'Mahmoud', 35 , 987654321 , 'Toronto', 647647647);
@@ -21,8 +24,8 @@ insert into patients(patientid, lastname, firstname, age,healthcardnum, paddress
   values(id_seq.nextval ,'Singh', 'Karanjot', 25 , 456789123 , 'Montreal', 514514514);
  
  
-Create Table Clinics(
-    ClinicId int,
+Create Table clinics(
+    clinicId int,
     DrID int,
     PatientId int,
     City varchar(255) NOT NULL,
@@ -41,7 +44,7 @@ insert into clinics(clinicid, drid, patientid, city, address, phonenumber, fax)
 insert into clinics(clinicid, drid, patientid, city, address, phonenumber, fax)
   values(id_seq.nextval, 7 , 3, 'Ottawa' , 'Parliament Hill', 613613613, 6136136133);
  
-Create Table Doctors(
+Create Table doctors(
     DrID int primary key,
     LastName varchar(255) NOT NULL,
     FirstName varchar(255),
@@ -59,7 +62,7 @@ insert into doctors(drid, lastname, firstname, CPSO, clinicid)
   values(id_seq.nextval, 'Mamoa', 'Jason', 65326 , 7);  
  
  
-Create Table Pharmacists(
+Create Table pharmacists(
     PHID int,
     Name varchar(255) NOT NULL,
     LicenseNum int unique,
@@ -96,7 +99,7 @@ insert into pharmacists(phid, name, licensenum)
 --  values(rxid_seq.nextval, 16, 4 ,13);  
  
  
-Create Table Insurances(
+Create Table insurances(
     InsID int,
     PatientId int,
     name varchar(255),
