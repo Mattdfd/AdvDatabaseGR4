@@ -50,6 +50,7 @@ insert into Insurances(insid, patientid, name)
   values(rxid_seq.nextval, 3 ,'Green Shield');
 
 
+
    
 insert into medications( DIN, name, strength, quantity )
   values(301171598, 'Pantoprazole' , 40 , 1000);

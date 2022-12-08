@@ -110,7 +110,7 @@ insert into Insurances(insid, patientid, name)
 insert into Insurances(insid, patientid, name)
   values(rxid_seq.nextval, 3 ,'Green Shield');
  
-Create Table Medication(
+Create Table medications(
     DIN int,
     Name varchar(255),
     Strength varchar(255),
@@ -118,9 +118,8 @@ Create Table Medication(
     PatientId int,
     PHID int,
    CONSTRAINT DIN_PK Primary Key (DIN),
-   CONSTRAINT med_patientid_fk FOREIGN KEY (PatientID) References Patient(PatientID),
-    CONSTRAINT med_pharmid_fk FOREIGN KEY (PHID) References Pharmacist(PHID)
-);
+   CONSTRAINT med_patientid_fk FOREIGN KEY (PatientID) References patients(PatientID),
+    CONSTRAINT med_pharmid_fk FOREIGN KEY (PHID) References pharmacists(PHID));
 
  
 insert into medications( DIN, name, strength, quantity,PatientID,PHID )

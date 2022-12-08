@@ -52,14 +52,13 @@ Create Table Insurance(
     Foriegn Key (PatientID) References Patient(PatientID)
 );
 
-Create Table Medication(
+Create Table medications(
+    DIN int,
     Name varchar(255),
     Strength varchar(255),
-    Quantity int,
-    DIN int,
+    Quantity int,    
     PatientId int,
     PHID int,
-    Primary Key (DIN),
-    Foriegn Key (PatientID) References Patient(PatientID),
-    Foriegn key (PHID) References Pharmacist(PHID)
-);
+   CONSTRAINT DIN_PK Primary Key (DIN),
+   CONSTRAINT med_patientid_fk FOREIGN KEY (PatientID) References patients(PatientID),
+   CONSTRAINT med_pharmid_fk FOREIGN KEY (PHID) References pharmacists(PHID));
