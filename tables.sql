@@ -2,18 +2,17 @@
 select 'drop table '||table_name||' cascade constraints;' from user_tables;
 -----Copy output and past into query to run-----
 
-CREATE TABLE patients(
-PatientId int Not null Unique,
-DrID int,
-LastName varchar(255) NOT NULL,
-FirstName varchar(255),
-Age int,
-HealthCardNum int,
-PAddress varchar(255),
-PhoneNumber varchar(255),
-CONSTRAINT Patientid_pk PRIMARY KEY(patientid)
-Constraint DRID_FK FOREIGN Key(DrID) References Doctors(DrID)
-);
+Create Table clinics(
+    clinicId int,
+    DrID int,
+    PatientId int,
+    City varchar(255) NOT NULL,
+    Address varchar(255),
+    PhoneNumber int,
+    Fax int,
+    CONSTRAINT clinicid_pk PRIMARY KEY(clinicid)
+    );
+
 
 Create Table doctors(
     DrID int primary key,
@@ -23,17 +22,18 @@ Create Table doctors(
     ClinicId int,
     CONSTRAINT clinicid_fk FOREIGN KEY (clinicid) REFERENCES clinics (clinicid));
 
-
-Create Table clinics(
-    clinicId int,
-    DrID int,
-    PatientId int,
-    City varchar(255) NOT NULL,
-    Address varchar(255),
-    PhoneNumber int,
-    Fax int,
-    CONSTRAINT clinicid_pk PRIMARY KEY(clinicid),
-    CONSTRAINT patientid_fk FOREIGN KEY (patientid) REFERENCES patients (patientid));
+CREATE TABLE patients(
+PatientId int,
+DrID int,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Age int,
+HealthCardNum int,
+PAddress varchar(255),
+PhoneNumber varchar(255),
+CONSTRAINT Patientid_pk PRIMARY KEY(Patientid),
+Constraint DRID_FK FOREIGN Key(DrID) References doctors(DrID)
+);
 
 
 Create Table pharmacists(
