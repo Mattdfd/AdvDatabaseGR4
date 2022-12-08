@@ -1,3 +1,7 @@
+---To Delete all tables----
+select 'drop table '||table_name||' cascade constraints;' from user_tables;
+-----Copy output and past into query to run-----
+
 CREATE TABLE patients(
 PatientId int Not null Unique,
 DrID int,
