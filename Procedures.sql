@@ -47,41 +47,55 @@ procedure test_pro
     
 
 
-    
-   --Procedure to check if patient has insurance
+
+--Procedure to check if patient has insurance
 
    create or replace
 procedure has_insur_pro
         (
             p_id in int,
-            p_return out insurances%ROWTYPE
+            p_return out insurances%Rowtype
+           
            
         )
     is
-     
-    
+     hasIn EXCEPTION;
+   
     begin
-     
 
       select *
       into p_return
       from insurances
       where PatientId = p_id;
-
-
-    end has_insur_pro;
+      
+      if p_return.PatientId = p_id then
+      
     
+      raise hasIn;
+      end if;
+
+
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('No Insurance Information Found.');
+  WHEN hasIn THEN 
+    dbms_output.put_line('Patient with Id#: ' || p_id || ' has insurance.');
+   
+end has_insur_pro;
+
+
+
     
     declare
-    p_return insurances%ROWTYPE;
+    p_return insurances%rowtype;
         p_id INT := 8;
         
         
     begin
-     DBMS_OUTPUT.PUT_LINE('Patient info Summary');
+    DBMS_OUTPUT.PUT_LINE('Patient Insurance info:');
     has_insur_pro(p_id,P_return);
-    DBMS_OUTPUT.PUT_LINE(p_return.InsID);
-    DBMS_OUTPUT.PUT_LINE(p_return.name);
-    DBMS_OUTPUT.PUT_LINE('Patient info Summary');
+    DBMS_OUTPUT.PUT_LINE('Insurance Name:' || p_return.name);   
+    DBMS_OUTPUT.PUT_LINE('Insurance ID#:' || p_return.insid);
+    
     end;
     
