@@ -1,50 +1,43 @@
+--Procedure to check what prescription a patient has
+
 create or replace
-procedure test_pro
+procedure presc_pro
         (
-            p_id in int,
-            p_return out medications%ROWTYPE
-           
+            p_id in int
+                  
         )
     is
      no_Patient EXCEPTION;
-    
+     patient_info EXCEPTION;
+    p_return  medications%ROWTYPE;
     begin
-     
 
       select *
       into p_return
       from medications
       where PatientId = p_id;
       
-      if p_id = null then
-      Raise no_Patient;
-   
+      if p_return.PatientId = p_id then
+      Raise patient_info;
+
      end if;
-      
-   
-    
+
      EXCEPTION
-  WHEN no_patient THEN
-    DBMS_OUTPUT.PUT_LINE('No patient information.');
-  
-    end test_pro;
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('No Patient Information Found.');
+
+  WHEN patient_info THEN
+    DBMS_OUTPUT.PUT_LINE('====Patient info Summary====');
+    DBMS_OUTPUT.PUT_LINE('Pharmacist ID#: ' || p_return.PHID);
+    DBMS_OUTPUT.PUT_LINE('DIN#: ' || p_return.DIN);
+    DBMS_OUTPUT.PUT_LINE('Medication Name: ' || p_return.Name);
+    DBMS_OUTPUT.PUT_LINE('Medication Quantity: ' || p_return.quantity);
+    DBMS_OUTPUT.PUT_LINE('Patient ID#: ' || p_return.PatientId);
+    DBMS_OUTPUT.PUT_LINE('====Patient info Summary====');
+
+    end presc_pro;
     
-    declare
-    p_return medications%ROWTYPE;
-        p_id INT := 8;
-        
-        
-    begin
-     DBMS_OUTPUT.PUT_LINE('Patient info Summary');
-    test_pro(p_id,P_return);
-    DBMS_OUTPUT.PUT_LINE(p_return.PHID);
-    DBMS_OUTPUT.PUT_LINE(p_return.DIN);
-    DBMS_OUTPUT.PUT_LINE(p_return.Name);
-    DBMS_OUTPUT.PUT_LINE(p_return.quantity);
-    DBMS_OUTPUT.PUT_LINE(p_return.PatientId);
-    DBMS_OUTPUT.PUT_LINE('Patient info Summary');
-    end;
-    
+exec presc_pro(7);
 
 
 

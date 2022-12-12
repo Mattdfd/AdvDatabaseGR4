@@ -295,6 +295,49 @@ insert into medications( DIN, name, strength, quantity,PatientId,PHID )
   
 insert into medications( DIN, name, strength, quantity,PatientId,PHID )
   values(9692108063, 'Metoprolol Tartrate' , 25 , 320 ,10 ,10); 
+
+  --Procedure to check what prescription a patient has
+
+create or replace
+procedure presc_pro
+        (
+            p_id in int
+                  
+        )
+    is
+     no_Patient EXCEPTION;
+     patient_info EXCEPTION;
+    p_return  medications%ROWTYPE;
+    begin
+
+      select *
+      into p_return
+      from medications
+      where PatientId = p_id;
+      
+      if p_return.PatientId = p_id then
+      Raise patient_info;
+
+     end if;
+
+     EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('No Patient Information Found.');
+
+  WHEN patient_info THEN
+    DBMS_OUTPUT.PUT_LINE('====Patient info Summary====');
+    DBMS_OUTPUT.PUT_LINE('Pharmacist ID#: ' || p_return.PHID);
+    DBMS_OUTPUT.PUT_LINE('DIN#: ' || p_return.DIN);
+    DBMS_OUTPUT.PUT_LINE('Medication Name: ' || p_return.Name);
+    DBMS_OUTPUT.PUT_LINE('Medication Quantity: ' || p_return.quantity);
+    DBMS_OUTPUT.PUT_LINE('Patient ID#: ' || p_return.PatientId);
+    DBMS_OUTPUT.PUT_LINE('====Patient info Summary====');
+
+    end presc_pro;
+
+-- TO TEST PROCEDURE
+
+exec presc_pro(7);
   
   
 --Procedure to check if patient has insurance
@@ -348,6 +391,7 @@ end has_insur_pro;
     
     end;
   
+--FUNCTION
 
       /*
 Calculate the number of medication units (e.g., tablets, capsules, etc.) per daily dose given that the patient has to take a certain total dose within a specified time period
