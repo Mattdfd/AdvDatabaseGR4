@@ -41,7 +41,7 @@ END;
 -- Function test
 DECLARE
     lv_medicationName medications.name%TYPE := 'Pantoprazole';
-    lv_patientId medications.patientId%TYPE := 7;
+    lv_patientId medications.patientId%TYPE := 1;
     lv_totalDosage medications.strength%TYPE := 5000;
     lv_startDate DATE := TO_DATE('01-01-2023', 'DD-MM-YYYY');
     lv_endDate DATE := TO_DATE('31-01-2023', 'DD-MM-YYYY');

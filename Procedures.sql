@@ -88,7 +88,7 @@ end has_insur_pro;
     
     declare
     p_return insurances%rowtype;
-        p_id INT := 8;
+        p_id INT := 4;
         
         
     begin
