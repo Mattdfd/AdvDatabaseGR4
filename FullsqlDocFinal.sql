@@ -452,4 +452,26 @@ BEGIN
     
     DBMS_OUTPUT.PUT_LINE('Patient #' || lv_patientId || ' is recommended to take ' || lv_dailyDosage || ' unit(s) of ' || lv_medicationName || ' per day.');
 END;
+
+
+--indexes
+
+--indexes
+
+Create index pateints_index on patients (patientid,
+DrID,
+LastName,
+FirstName)
+
+Create index clinics_index on clinics(clinics, drid,patientid)
+
+Create index doctors_index on doctors (drid, lastname, firstname)
+
+Create index pharmicists_index on pharmicists(phi’s, lastname)
+
+Create index rx_index on rx(exit, phi’s,patientid)
+
+Create index insurances_index on insurances (insid, patientid,name)
+
+Create index medications_index on medications (din, name, strength)
   
