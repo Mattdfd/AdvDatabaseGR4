@@ -59,3 +59,9 @@ Create Table medications(
    CONSTRAINT DIN_PK Primary Key (DIN),
    CONSTRAINT med_patientid_fk FOREIGN KEY (PatientID) References patients(PatientID),
    CONSTRAINT med_pharmid_fk FOREIGN KEY (PHID) References pharmacists(PHID));
+
+   Create Table date_log(
+    PatientID int,
+    date_added date primary key,
+  
+    CONSTRAINT DL_PI_fk FOREIGN KEY (PatientID) References patients(PatientID));

@@ -71,3 +71,19 @@ Create index rx_index on rx(exit, phi’s,patientid)
 Create index insurances_index on insurances (insid, patientid,name)
 
 Create index medications_index on medications (din, name, strength)
+
+
+--Triggers
+
+--need to update this trigger to add to date_log
+
+CREATE TRIGGER del_patient
+ON insurances
+FOR insert into table (patient_log)
+values (patientId,date)
+AS 
+SELECT * FROM DELETED
+WHERE CANADA_STATENAME='Ontario';
+
+DELETE FROM CANADA_STATES 
+WHERE CANADA_STATENAME='Ontario';
