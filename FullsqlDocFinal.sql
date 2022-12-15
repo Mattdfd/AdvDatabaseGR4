@@ -1,3 +1,6 @@
+--This SQL File contains Group 4's full ready to be compiled SQL codes.  Copy and past into SQL Developer for the full database set up.
+--All other SQL files contain individual components of this database.
+
 select 'drop table '||table_name||' cascade constraints;' from user_tables;
 
 drop table CLINICS cascade constraints;
