@@ -125,11 +125,7 @@ Create Table medications(
    CONSTRAINT med_patientid_fk FOREIGN KEY (PatientID) References patients(PatientID),
    CONSTRAINT med_pharmid_fk FOREIGN KEY (PHID) References pharmacists(PHID));
 
-      Create Table date_log(
-    PatientID int,
-    date_added date primary key,
-  
-    CONSTRAINT DL_PI_fk FOREIGN KEY (PatientID) References patients(PatientID));
+     
    
    
 insert into clinics(clinicid, drid, patientid, city, address, phonenumber, fax)
