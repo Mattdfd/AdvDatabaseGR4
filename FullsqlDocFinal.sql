@@ -533,17 +533,17 @@ SELECT * FROM patients;
 Create index pateints_index on patients (patientid,
 DrID,
 LastName,
-FirstName)
+FirstName);
 
-Create index clinics_index on clinics(clinics, drid,patientid)
+Create index clinics_index on clinics(clinics, drid,patientid);
 
-Create index doctors_index on doctors (drid, lastname, firstname)
+Create index doctors_index on doctors (drid, lastname, firstname);
 
-Create index pharmicists_index on pharmicists(phi’s, lastname)
+Create index pharmicists_index on pharmicists(phi’s, lastname);
 
-Create index rx_index on rx(exit, phi’s,patientid)
+Create index rx_index on rx(exit, phi’s,patientid);
 
-Create index insurances_index on insurances (insid, patientid,name)
+Create index insurances_index on insurances (insid, patientid,name);
 
-Create index medications_index on medications (din, name, strength)
+Create index medications_index on medications (din, name, strength);
   
